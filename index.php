@@ -6,7 +6,7 @@
 echo "Hello World!<br>";
 EcHo "Hello World!<br>"; */
 
-$age = 12;
+$age = 12;  
 $cgpa = 2.1;
 $name = "AIsha Abdullahi";
 
