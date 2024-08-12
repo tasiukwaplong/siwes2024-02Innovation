@@ -1,13 +1,12 @@
 <?php
+session_start();
 // echo $_POST['item'];
+// print_r($_SESSION['todos']);
 
-$todos = array(
-    "Open the office by 9am",
-    "Sweep the office",
-    "Arrange the chairs",
-    "Wash the toilet",
-    "Attend class",
-    "Do assignment"
-);
+function createTodo(){
+    // add new to-do
+    array_push($_SESSION['todos'], $_POST['item']);
+}
 
+createTodo();
 ?>

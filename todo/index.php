@@ -1,13 +1,16 @@
 <?php
-$todos = array(
-    "Open the office by 9am",
-    "Sweep the office",
-    "Arrange the chairs",
-    "Wash the toilet",
-    "Attend class",
-    "Do assignment",
-    "Watch Anime"
-);
+session_start();
+// print_r($_SESSION['todos']);
+// echo $_SESSION['todos'];
+// $_SESSION['todos'] = array(
+//     "Open the office by 9am",
+//     "Sweep the office",
+//     "Arrange the chairs",
+//     "Wash the toilet",
+//     "Attend class",
+//     "Do assignment",
+//     "Watch Anime"
+// );
 ?>
 
 
@@ -42,7 +45,8 @@ $todos = array(
                 <div class="row">
 
                     <?php
-                        for ($x = 0; $x <= (count($todos) - 1); $x++):
+                        $todos = $_SESSION['todos'];
+                        for ($x = 0; $x < count($todos); $x++):
                     ?>
                     <div class="col-md-10 p-3 border border-4">
                        <?php echo $todos[$x];?>
@@ -62,7 +66,7 @@ $todos = array(
                             </button>
                         </div>
                     </div>
-
+                     <!-- stops here -->
                     <?php endfor;?>
                     
                 </div>
