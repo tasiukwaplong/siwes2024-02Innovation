@@ -1,16 +1,5 @@
 <?php
-session_start();
-// print_r($_SESSION['todos']);
-// echo $_SESSION['todos'];
-// $_SESSION['todos'] = array(
-//     "Open the office by 9am",
-//     "Sweep the office",
-//     "Arrange the chairs",
-//     "Wash the toilet",
-//     "Attend class",
-//     "Do assignment",
-//     "Watch Anime"
-// );
+require 'backend.php';
 ?>
 
 
@@ -45,29 +34,32 @@ session_start();
                 <div class="row">
 
                     <?php
-                        $todos = $_SESSION['todos'];
-                        for ($x = 0; $x < count($todos); $x++):
-                    ?>
-                    <div class="col-md-10 p-3 border border-4">
-                       <?php echo $todos[$x];?>
-                        <p class="float-end mt-3">
-                            <small>
-                                <strong>Status: </strong> Not done
-                            </small>
-                        </p>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="d-grid gap-2">
-                            <button class="btn btn-sm btn-danger" type="button">
-                                <i class="fa fa-trash-o"></i>
-                            </button>
-                            <button class="btn btn-sm btn-secondary" type="button">
-                                <i class="fa fa-pencil"></i>
-                            </button>
-                        </div>
-                    </div>
-                     <!-- stops here -->
-                    <?php endfor;?>
+                        $todos = readTodo();
+                        if(count($todos) == 0){
+                            echo '<div class="text-center alert alert-warning">No to-do added yet</div>';
+                        }
+                        for ($index = 0; $index < count($todos); $index++): ?>
+                            <!-- loop starts here -->
+                            <div class="col-md-10 p-3 border border-4">
+                            <?php echo $todos[$index];?>
+                                <p class="float-end mt-3">
+                                    <small>
+                                        <strong>Status: </strong> Not done
+                                    </small>
+                                </p>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-sm btn-danger" type="button">
+                                        <i class="fa fa-trash-o"></i>
+                                    </button>
+                                    <a class="btn btn-sm btn-secondary" href="<?php echo $index;?>">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- stops here -->
+                        <?php endfor;?>
                     
                 </div>
             </div>
