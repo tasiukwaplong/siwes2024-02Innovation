@@ -23,8 +23,20 @@ require 'backend.php';
             <!-- colunmn for form to add todo -->
             <div class="col-md-6">
                 <form action="backend.php" method="POST">
+                    
+                    <?php if(isset($_GET['indx'])): ?>
+                    <!-- to content existing todo -->
+                    <textarea name="item-content" id="" cols="20" rows="10" class="form-control"><?php echo readTodo($_GET['indx'])[0]; ?></textarea>
+                    <a href="./" class="btn btn-success">Add new</a>
+                    <input type="hidden" name="item-index" value="<?php echo readTodo($_GET['indx'])[1]; ?>">
+                    <button type="submit" class="btn btn-primary btn-block">Update <i class="fa fa-pencil"></i></button>
+                    
+                    <?php else: ?>
+                    <!-- to add new todo -->
                     <textarea name="item" id="" cols="20" rows="10" class="form-control"></textarea>
                     <button type="submit" class="btn btn-primary btn-block">Add <i class="fa fa-plus"></i></button>
+                    <?php endif; ?>
+
                     <button type="cancel" class="btn btn-danger">Clear <i class="fa fa-trash"></i> </button>
                 </form>
             </div>
@@ -34,7 +46,7 @@ require 'backend.php';
                 <div class="row">
 
                     <?php
-                        $todos = readTodo();
+                        $todos = readTodos();
                         if(count($todos) == 0){
                             echo '<div class="text-center alert alert-warning">No to-do added yet</div>';
                         }
@@ -43,9 +55,7 @@ require 'backend.php';
                             <div class="col-md-10 p-3 border border-4">
                             <?php echo $todos[$index];?>
                                 <p class="float-end mt-3">
-                                    <small>
-                                        <strong>Status: </strong> Not done
-                                    </small>
+                                
                                 </p>
                             </div>
                             <div class="col-md-2">
@@ -53,7 +63,7 @@ require 'backend.php';
                                     <button class="btn btn-sm btn-danger" type="button">
                                         <i class="fa fa-trash-o"></i>
                                     </button>
-                                    <a class="btn btn-sm btn-secondary" href="<?php echo $index;?>">
+                                    <a class="btn btn-sm btn-secondary" href="<?php echo $_SERVER['PHP_SELF'].'?indx='.$index?>">
                                         <i class="fa fa-pencil"></i>
                                     </a>
                                 </div>
